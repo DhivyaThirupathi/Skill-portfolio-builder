@@ -1,0 +1,218 @@
+/* Your existing styles for home.component.css with additions for background video */
+
+.home-container {
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* === MODIFIED HERO SECTION FOR BACKGROUND VIDEO === */
+.hero-section {
+  min-height: 80vh;
+  background: linear-gradient(135deg, #5E35B1, #baadde); /* Fallback background */
+  color: white;
+  /* display: flex; /* Flex properties will be applied to .hero-content */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
+  /* padding: clamp(2rem, 5vw, 4rem); /* Padding will be applied to .hero-content */
+  position: relative; /* Crucial for positioning video and overlay */
+  overflow: hidden;   /* Prevents video overflow */
+}
+
+/* === ADDED FOR BACKGROUND VIDEO === */
+.hero-background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Layer 1: Video */
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust opacity as needed */
+  z-index: 2; /* Layer 2: Overlay */
+}
+
+/* This new class wraps your existing hero text and buttons.
+   It inherits the flex layout from the parent .hero-section via HTML fxLayout attributes
+   OR you can explicitly define them here if you remove fxLayout from .hero-section in HTML. */
+.hero-content {
+  position: relative; /* To sit on top of video/overlay */
+  z-index: 3;         /* Layer 3: Content */
+  display: flex;      /* Ensures fxLayout directives in HTML work on this new wrapper */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Ensures text centering */
+  width: 100%;        /* Takes full width of parent */
+  height: 100%;       /* Takes full height if .hero-section has fixed height, or min-height from .hero-section */
+  min-height: inherit; /* Inherit min-height from .hero-section */
+  padding: clamp(2rem, 5vw, 4rem); /* Moved padding here from .hero-section */
+  box-sizing: border-box; /* Include padding in width/height calculation */
+}
+/* === END OF VIDEO RELATED ADDITIONS/MODIFICATIONS === */
+
+.animate-text {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  color: white; /* Ensure text is white over video/overlay */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Optional: enhance readability */
+}
+
+.hero-subtitle {
+  max-width: 640px;
+  margin: 1rem auto 2rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+  color: white; /* Ensure text is white over video/overlay */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Optional: enhance readability */
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+}
+
+.action-button {
+  background-color: white;
+  color: #5E35B1;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.action-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.features-section {
+  padding: clamp(3rem, 5vw, 5rem) 2rem;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+  color: #333;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 4px;
+  background-color: #bdb4cf;
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 24px; /* This might be redundant if fxLayoutGap on parent covers it */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 50%;
+  
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* If .feature-card-content is the mat-card itself, and you want to align header items: */
+.feature-card mat-card-header { /* Target mat-card-header for icon and title alignment */
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* If you want space between icon and title block */
+}
+
+
+.feature-icon {
+  font-size: 2.25rem;
+  height: 2.25rem;
+  width: 2.25rem;
+  color: #5E35B1;
+  /* margin-right: 1rem; /* Replaced by gap on mat-card-header if applied */
+}
+
+.get-started-section {
+  padding: clamp(3rem, 5vw, 5rem) 2rem;
+  background-color: white;
+  text-align: center;
+}
+
+.get-started-button {
+  margin-top: 2rem;
+  padding: 0.85rem 2.5rem;
+  font-size: 1.1rem;
+  background-color: #5E35B1;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.get-started-button:hover {
+  background-color: #4527A0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .hero-section {
+    /* Padding is now on .hero-content, but you might want to adjust min-height for mobile */
+    min-height: 70vh;
+  }
+  .hero-content { /* Ensure mobile padding is appropriate */
+      padding: 2rem 1rem;
+  }
+
+  .features-section,
+  .get-started-section {
+    padding: 2rem 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+}

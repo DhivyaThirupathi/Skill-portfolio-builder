@@ -1,0 +1,499 @@
+/* Define a professional color palette */
+:root {
+  --primary-color: #007bff; /* A vibrant blue for primary actions and highlights */
+  --primary-color-dark: #0056b3; /* Darker shade for hover states */
+  --secondary-color: #6c757d; /* A neutral grey for secondary text and elements */
+  --light-grey: #f8f9fa; /* Very light grey for backgrounds */
+  --medium-grey: #e9ecef; /* Slightly darker grey for borders and dividers */
+  --dark-grey: #343a40; /* Dark grey for primary text */
+  --white: #ffffff;
+  --black: #000000;
+  --success-color: #28a745; /* Green for success messages or icons */
+  --danger-color: #dc3545; /* Red for error messages or delete icons */
+  --box-shadow-light: rgba(0, 0, 0, 0.05);
+  --box-shadow-medium: rgba(0, 0, 0, 0.1);
+  --box-shadow-dark: rgba(0, 0, 0, 0.15);
+  --border-radius: 8px; /* Consistent border radius */
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-grey);
+  color: var(--dark-grey);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.form-container {
+  padding: 32px;
+  position: relative;
+  max-width: 950px;
+  margin: 40px auto;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--box-shadow-medium);
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+}
+
+.loading-overlay::after {
+  content: ''; /* Using app-loading-spinner now, so this text can be removed or be a fallback */
+  /* font-size: 1.2em; */
+  /* color: var(--primary-color); */
+}
+
+.form-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  /* border: 1px solid var(--medium-grey); Outlined appearance from mat-card handles this */
+  transition: box-shadow var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+  margin-bottom: 24px;
+}
+
+.form-card:hover {
+  box-shadow: 0 10px 20px var(--box-shadow-dark);
+  transform: translateY(-4px);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.section-container {
+  margin: 32px 0;
+  padding: 24px;
+  background-color: var(--light-grey);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--medium-grey);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--medium-grey);
+}
+
+.section-title {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.5em;
+  font-weight: 600;
+  display: flex; /* For aligning icon with text */
+  align-items: center;
+}
+
+.project-item {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--medium-grey);
+  box-shadow: 0 2px 6px var(--box-shadow-light);
+  animation: fadeIn var(--transition-speed) ease-out;
+  transition: box-shadow var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+}
+
+.project-item:hover {
+  box-shadow: 0 6px 12px var(--box-shadow-medium);
+  transform: translateY(-3px);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-header h4 {
+  margin: 0;
+  color: var(--dark-grey);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+/* Styling for action icons/buttons within project-header using CSS-only icons */
+.project-header .actions button { /* This style was there, might not be needed if using mat-icon-button directly */
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.project-header .actions button:hover {
+  background-color: var(--medium-grey);
+}
+
+
+.no-projects-message {
+  text-align: center;
+  padding: 32px;
+  background-color: var(--medium-grey);
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  font-style: italic;
+  border: 1px dashed var(--secondary-color);
+}
+
+mat-card-actions {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--medium-grey);
+  background-color: var(--light-grey);
+}
+
+mat-card-actions button { /* General styling for buttons in actions, Material buttons will mostly override */
+  margin-left: 8px;
+  /* padding: 10px 20px; Let Material handle padding for its buttons */
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* Styles for primary/secondary can be applied via classes if not using Material color attribute */
+mat-card-actions button.primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: 1px solid var(--primary-color);
+}
+mat-card-actions button.primary:hover {
+  background-color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+}
+
+mat-card-actions button.secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+mat-card-actions button.secondary:hover {
+  background-color: var(--light-grey);
+  border-color: var(--primary-color-dark);
+  color: var(--primary-color-dark);
+  transform: translateY(-2px);
+}
+
+/* --- CSS-ONLY ICONS --- */
+.icon {
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  speak-as: none;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  width: 1em; /* Base size, can be overridden by context */
+  height: 1em; /* Base size, can be overridden by context */
+  margin-right: 0.5em; /* Default space between icon and text */
+  vertical-align: -0.15em; /* Adjust for better baseline alignment */
+  color: currentColor; /* Inherit color by default */
+}
+
+/* Plus Icon (+) */
+.icon-plus::before,
+.icon-plus::after {
+  content: '';
+  position: absolute;
+  background-color: currentColor;
+}
+.icon-plus::before {
+  width: 100%;
+  height: 0.125em; /* Thickness of the lines relative to icon font size */
+  max-height: 2px; /* Max thickness */
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.icon-plus::after {
+  width: 0.125em; /* Thickness of the lines */
+  max-width: 2px; /* Max thickness */
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Cross Icon (X) - for delete/close */
+.icon-cross {
+  width: 0.8em;
+  height: 0.8em;
+}
+.icon-cross::before,
+.icon-cross::after {
+  content: '';
+  position: absolute;
+  background-color: currentColor; /* Default to current color, can be overridden */
+  width: 100%;
+  height: 0.125em; /* Thickness */
+  max-height: 2px;
+  top: 50%;
+  left: 0;
+}
+.icon-cross::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+.icon-cross::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Pencil Icon (Edit) */
+.icon-pencil {
+  width: 0.9em;
+  height: 0.9em;
+}
+.icon-pencil::before { /* Body of the pencil */
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 25%;
+  background-color: currentColor;
+  transform: rotate(-45deg);
+  top: 35%;
+  left: 0%;
+  border-top-left-radius: 0.1em;
+  border-bottom-left-radius: 0.1em;
+}
+.icon-pencil::after { /* Tip of the pencil */
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.18em 0.18em 0 0.18em; /* Adjust for sharpness */
+  border-color: currentColor transparent transparent transparent;
+  transform: rotate(-45deg) translate(0.25em, -0.45em); /* Positioning the tip */
+  top: 50%;
+  left: 50%;
+}
+
+/* Chevron Down Icon (Arrow) */
+.icon-chevron-down {
+  width: 0.7em;
+  height: 0.7em;
+  border-style: solid;
+  border-width: 0 0.125em 0.125em 0; /* Thickness of the lines */
+  border-color: currentColor;
+  display: inline-block;
+  transform: rotate(45deg);
+  position: relative;
+  top: -0.1em;
+}
+
+/* Gear Icon (for Skills/Settings) */
+.icon-gear {
+  width: 1em;
+  height: 1em;
+}
+.icon-gear::before { /* Outer circle */
+  content: "";
+  position: absolute;
+  box-sizing: border-box; /* Important for border calculations */
+  top: 10%; left: 10%;
+  width: 80%; height: 80%;
+  border-radius: 50%;
+  border: 0.15em solid currentColor; /* Main gear body */
+}
+.icon-gear::after { /* Center hole */
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 30%; height: 30%;
+  background-color: var(--light-grey); /* Or parent background of section title */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border: 0.05em solid currentColor; /* Optional inner border */
+}
+/* Simple "teeth" for gear using box-shadows on the main element for simplicity */
+.icon-gear {
+  box-shadow: 
+    0 0 0 0.08em currentColor, /* creates the appearance of teeth */
+    /* Horizontal/Vertical spokes */
+    inset 0 0.3em 0 0 currentColor, 
+    inset 0 -0.3em 0 0 currentColor,
+    inset 0.3em 0 0 0 currentColor,
+    inset -0.3em 0 0 0 currentColor;
+  border-radius: 50%; /* Needed for box-shadow to simulate teeth on circle */
+}
+
+
+/* Folder Icon (for Projects) */
+.icon-folder {
+  width: 1em;
+  height: 0.85em;
+}
+.icon-folder::before { /* Main body of folder */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  background-color: currentColor;
+  border-radius: 0.1em;
+}
+.icon-folder::after { /* Tab of folder */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0; /* Or some small offset like 0.05em */
+  width: 40%;
+  height: 25%;
+  background-color: currentColor;
+  border-top-left-radius: 0.1em;
+  border-top-right-radius: 0.1em;
+}
+
+
+/* --- STYLING FOR CSS-ONLY ICONS IN SPECIFIC CONTEXTS --- */
+
+/* Icons in section titles */
+.section-title .icon {
+  font-size: 0.8em; /* Icon slightly smaller than title text */
+  margin-right: 10px;
+  color: var(--primary-color); /* Match title color */
+  vertical-align: -0.05em; /* Fine-tune vertical alignment */
+}
+/* Specific for gear icon in title to ensure hole is section bg color */
+.section-title .icon-gear::after {
+    background-color: var(--light-grey);
+}
+
+
+/* Styling for CSS-only icons in Material buttons */
+/* For mat-mini-fab */
+.css-icon-fab { /* Class to add to the mat-mini-fab button */
+  display: inline-flex !important; /* Override Material if needed */
+  justify-content: center;
+  align-items: center;
+}
+.css-icon-fab .icon {
+  font-size: 1.3em; /* Adjust size for FAB */
+  margin-right: 0; /* No margin if icon is alone */
+  color: var(--white); /* Default for primary FAB */
+}
+.css-icon-fab.mat-primary .icon-plus::before, /* Ensure + is white for primary */
+.css-icon-fab.mat-primary .icon-plus::after {
+  background-color: var(--white);
+}
+
+/* For mat-icon-button */
+.css-icon-button { /* Class to add to the mat-icon-button */
+  display: inline-flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.css-icon-button .icon {
+  font-size: 1.1em; /* Adjust size for icon button */
+  margin-right: 0;
+}
+.css-icon-button.mat-warn .icon-cross {
+  color: var(--danger-color); /* Make cross icon use danger color for warn buttons */
+}
+.css-icon-button.mat-warn .icon-cross::before,
+.css-icon-button.mat-warn .icon-cross::after {
+  background-color: var(--danger-color);
+}
+
+/* For mat-chip-remove icon */
+mat-chip-row button[matChipRemove] .icon-cross {
+  font-size: 1.2em; /* Adjust size for chip remove */
+  color: var(--secondary-color); /* Default color for chip remove icon */
+  margin-right: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-speed);
+}
+mat-chip-row button[matChipRemove]:hover .icon-cross {
+  color: var(--dark-grey); /* Darken on hover */
+  opacity: 1;
+}
+
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- MEDIA QUERIES --- */
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 24px;
+    margin: 20px auto;
+    box-shadow: 2px 4px 5px
+    ;
+  }
+  .section-title {
+    font-size: 1.3em;
+  }
+  .project-item {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-container {
+    padding: 16px;
+    margin: 16px auto;
+    box-shadow: #007bff 4px 8px 4px;
+  }
+  .project-item {
+    padding: 12px;
+  }
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-title {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  mat-card-actions {
+    padding: 16px;
+    flex-direction: column;
+  }
+  mat-card-actions button {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+  mat-card-actions button:last-child {
+    margin-bottom: 0;
+  }
+}

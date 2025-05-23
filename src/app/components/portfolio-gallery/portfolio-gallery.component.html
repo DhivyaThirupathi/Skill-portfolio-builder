@@ -1,0 +1,101 @@
+<div class="gallery-container" (window:resize)="onResize($event)">
+  <div class="gallery-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <h1 class="mat-headline-4 gallery-title">Portfolios</h1>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="createNewPortfolio()"
+      class="new-portfolio-btn">
+      <mat-icon>add</mat-icon>
+      New Portfolio
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <app-loading-spinner message="Loading portfolios..."></app-loading-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && portfolios.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">sentiment_very_dissatisfied</mat-icon>
+    <h2>No Portfolios Found</h2>
+    <p>Create your first portfolio to get started</p>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="createNewPortfolio()">
+      Create Portfolio
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && portfolios.length > 0"
+        fxLayout="row wrap"
+        fxLayoutGap="24px grid"
+        class="portfolio-grid">
+    <div *ngFor="let portfolio of portfolios"
+          fxFlex="100%"
+          fxFlex.gt-xs="calc(50% - 12px)"
+          fxFlex.gt-sm="calc(33.333% - 16px)"
+          class="portfolio-card-container">
+      <mat-card appearance="outlined"
+                class="portfolio-card mat-elevation-z3"
+                (click)="viewPortfolio(portfolio._id || '')">
+        <mat-card-header>
+          <mat-card-title class="portfolio-title">{{ portfolio.fullName }}</mat-card-title>
+          <mat-card-subtitle>
+            <span class="date-label">Updated: </span>
+            {{ getFormattedDate(portfolio.updatedAt) }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="about-preview">{{ portfolio.aboutMe | slice:0:100 }}{{ (portfolio.aboutMe?.length || 0) > 100 ? '...' : '' }}</p>
+
+          <div class="skills-container" *ngIf="portfolio.skills && portfolio.skills.length > 0">
+            <mat-chip-listbox aria-label="Portfolio skills">
+              <mat-chip-option *ngFor="let skill of portfolio.skills.slice(0, 3)"
+                                selected disableRipple>
+                {{ skill }}
+              </mat-chip-option>
+              <mat-chip-option *ngIf="portfolio.skills.length > 3"
+                                selected disableRipple [color]="'primary'" class="more-skills-chip">
+                +{{ portfolio.skills.length - 3 }} more
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+
+          <div class="projects-count" *ngIf="portfolio.projects">
+            <mat-icon>folder_open</mat-icon>
+            <span>{{ portfolio.projects.length }} {{ portfolio.projects.length === 1 ? 'Project' : 'Projects' }}</span>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button
+            mat-stroked-button
+            color="primary"
+            matTooltip="View Details"
+            (click)="viewPortfolio(portfolio._id || '')">
+            <mat-icon>visibility</mat-icon>
+            View
+          </button>
+          <button
+            mat-stroked-button
+            color="accent"
+            matTooltip="Edit Portfolio"
+            (click)="editPortfolio(portfolio._id || '', $event)">
+            <mat-icon>edit</mat-icon>
+            Update
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            matTooltip="Delete Portfolio"
+            (click)="deletePortfolio(portfolio._id || '', $event)">
+            <mat-icon>delete_outline</mat-icon>
+            Delete
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

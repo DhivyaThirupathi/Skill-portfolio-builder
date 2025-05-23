@@ -1,0 +1,111 @@
+<div class="portfolio-view-container">
+  <div *ngIf="isLoading" class="loading-container">
+    <app-loading-spinner message="Loading portfolio details..."></app-loading-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-container">
+    <mat-icon color="warn" class="error-icon">error</mat-icon>
+    <h2>{{ errorMessage }}</h2>
+    <button mat-raised-button color="primary" (click)="goBack()">Back to Portfolios</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && portfolio" class="portfolio-content">
+    <div class="portfolio-header">
+      <button mat-icon-button color="primary" (click)="goBack()" matTooltip="Back to Portfolios">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="portfolio-name">{{ portfolio.fullName }}</h1>
+      <div class="portfolio-actions">
+        <button mat-stroked-button color="primary" (click)="exportToPdf()">
+          <mat-icon>📑</mat-icon> Export
+        </button>
+        <button mat-stroked-button color="accent" (click)="editPortfolio()">
+          <mat-icon>🖋️</mat-icon> Edit
+        </button>
+        <button mat-stroked-button color="warn" (click)="deletePortfolio()">
+          <mat-icon>🗑️</mat-icon> Delete
+        </button>
+        </div>
+    </div>
+
+    <div class="date-info">
+      <div>
+        <span class="date-label">Created:</span> {{ getFormattedDate(portfolio.createdAt) }}
+      </div>
+      <div>
+        <span class="date-label">Last Updated:</span> {{ getFormattedDate(portfolio.updatedAt) }}
+      </div>
+    </div>
+
+    <mat-card appearance="outlined" class="section-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar color="primary">🧑‍💼</mat-icon>
+        <mat-card-title>About Me</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="about-text">{{ portfolio.aboutMe }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="section-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar color="primary">🕵️</mat-icon>
+        <mat-card-title>Skills</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="skills-container">
+          <mat-chip-listbox>
+            <mat-chip-option *ngFor="let skill of portfolio.skills" 
+                              selected disableRipple>
+              {{ skill }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="section-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar color="primary">📂</mat-icon>
+        <mat-card-title>Projects</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="portfolio.projects.length === 0" class="empty-projects">
+          <p>No projects added yet.</p>
+        </div>
+
+        <div *ngFor="let project of portfolio.projects; let i = index" class="project-item">
+          <div class="project-header">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <div class="project-number">{{ i + 1 }}</div>
+          </div>
+          <p class="project-description">{{ project.description }}</p>
+          <mat-divider *ngIf="i < portfolio.projects.length - 1"></mat-divider>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="section-card" *ngIf="portfolio.achievements">
+      <mat-card-header>
+        <mat-icon mat-card-avatar color="primary">🏆</mat-icon> <mat-card-title>Achievements</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="achievements-text">{{ portfolio.achievements }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="bottom-actions">
+      <button mat-stroked-button color="primary" (click)="goBack()">
+        <mat-icon>⬅️</mat-icon> Back to Portfolios
+      </button>
+      <div>
+        <button mat-raised-button color="primary" (click)="exportToPdf()" class="action-button">
+          <mat-icon>📑</mat-icon> Export to PDF
+        </button>
+        <button mat-raised-button color="accent" (click)="editPortfolio()" class="action-button">
+          <mat-icon>✍️</mat-icon> Edit Portfolio
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

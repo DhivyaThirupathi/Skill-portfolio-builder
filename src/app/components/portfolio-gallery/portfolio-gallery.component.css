@@ -1,0 +1,312 @@
+/* Gallery View - Modern & Professional UI Enhancements */
+
+/* Define a professional color palette */
+:root {
+  --gallery-primary-color: #673ab7; /* Purple for primary actions/elements */
+  --gallery-primary-color-rgb: 103, 58, 183; /* RGB for rgba() */
+  --gallery-primary-color-light: #ede7f6; /* Light shade for backgrounds or chips */
+
+  --gallery-accent-color-for-update: #28a745; /* Green for 'Update' button (Success) */
+  --gallery-accent-color-for-update-rgb: 40, 167, 69; /* RGB for rgba() */
+
+  --gallery-warn-color-for-delete: #dc3545; /* Red for 'Delete' button (Danger) */
+  --gallery-warn-color-for-delete-rgb: 220, 53, 69; /* RGB for rgba() */
+
+  --gallery-text-primary: #212121;   /* Dark grey for main text */
+  --gallery-text-secondary: #757575; /* Lighter grey for supporting text/icons */
+  --gallery-background-color: #f4f6f8; /* Light grey for the page background */
+  --gallery-card-background: #ffffff;
+  --gallery-border-color: #e0e0e0;    /* Subtle borders */
+  --gallery-divider-color: #eeeeee;   /* Lighter dividers */
+
+  --gallery-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --gallery-card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --gallery-border-radius: 8px;
+  --gallery-transition-speed: 0.3s;
+  --gallery-button-hover-alpha: 0.08; /* Opacity for button hover background tint */
+}
+
+.gallery-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--gallery-background-color);
+  min-height: 100vh;
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gallery-divider-color);
+}
+
+.gallery-header .gallery-title {
+  font-weight: 500;
+  color: var(--gallery-text-primary);
+  margin: 0;
+}
+.gallery-header .mat-headline-4 { /* Targets Material's class directly */
+    margin: 0;
+    color: var(--gallery-text-primary);
+}
+
+.new-portfolio-btn {
+  margin-left: 16px;
+  /* Assuming mat-raised-button color="primary" handles its main appearance */
+}
+.new-portfolio-btn mat-icon {
+  margin-right: 8px;
+}
+
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  text-align: center;
+  background-color: var(--gallery-card-background);
+  border-radius: var(--gallery-border-radius);
+  padding: 48px 24px;
+  margin: 32px auto;
+  box-shadow: var(--gallery-card-shadow);
+  max-width: 600px;
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  color: var(--gallery-text-primary);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  color: var(--gallery-text-secondary);
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+.empty-icon {
+  font-size: 56px;
+  height: 56px;
+  width: 56px;
+  color: var(--gallery-primary-color);
+  margin-bottom: 20px;
+}
+
+.portfolio-grid {
+  margin-top: 16px;
+  /* Flex-Layout (fxLayout="row wrap" fxLayoutGap="24px grid") from HTML handles grid display and gap. */
+}
+
+
+.portfolio-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform var(--gallery-transition-speed) ease, box-shadow var(--gallery-transition-speed) ease;
+  background-color: var(--gallery-card-background);
+  border-radius: var(--gallery-border-radius);
+  /* Relies on mat-elevation-z3 from your HTML for base shadow. */
+  overflow: hidden;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--gallery-card-hover-shadow); /* Overrides mat-elevation on hover for a custom effect */
+}
+
+.portfolio-card mat-card-header {
+  padding: 20px 20px 12px 20px;
+}
+
+.portfolio-title { /* Resides in mat-card-title */
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--gallery-text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensure it doesn't overflow header */
+}
+
+.portfolio-card mat-card-subtitle,
+.date-label {
+  font-size: 0.85rem;
+  color: var(--gallery-text-secondary);
+  line-height: 1.4;
+}
+
+.portfolio-card mat-card-content {
+  flex-grow: 1;
+  padding: 16px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-preview {
+  color: var(--gallery-text-secondary);
+  line-height: 1.6;
+  max-height: 4.8em; /* Approx 3 lines */
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.skills-container mat-chip-listbox {
+    margin-top: 4px;
+}
+.skills-container mat-chip-option {
+    font-size: 0.8rem;
+    background-color: var(--gallery-primary-color-light);
+    color: var(--gallery-primary-color);
+    font-weight: 500;
+}
+.skills-container .more-skills-chip {
+    font-style: italic;
+    /* Example to make it look more like a plain text or less interactive:
+    background-color: transparent !important;
+    color: var(--gallery-text-secondary) !important;
+    cursor: default;
+    */
+}
+
+.projects-count {
+  display: flex;
+  align-items: center;
+  color: var(--gallery-text-secondary);
+  font-size: 0.9rem;
+}
+
+.projects-count mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  color: inherit;
+}
+
+.portfolio-card mat-card-actions {
+  padding: 10px 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid var(--gallery-divider-color);
+  background-color: #fcfcfc; /* Subtle background for actions area */
+  gap: 8px; /* Spacing between action buttons */
+}
+
+/* Styling for mat-stroked-button within card actions */
+.portfolio-card mat-card-actions button[mat-stroked-button] {
+  padding: 6px 12px; /* Compact padding */
+  font-size: 0.875rem;
+  line-height: normal; /* For good icon-text alignment */
+  /* border-width: 1px; /* Ensure border is not too thick if overriding */
+}
+
+.portfolio-card mat-card-actions button[mat-stroked-button] mat-icon {
+  margin-right: 6px;
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+}
+
+/* --- View Button (Primary) --- */
+.portfolio-card mat-card-actions button[mat-stroked-button][color="primary"] {
+  color: var(--gallery-primary-color);
+  border-color: var(--gallery-primary-color);
+}
+.portfolio-card mat-card-actions button[mat-stroked-button][color="primary"]:hover {
+  background-color: rgba(var(--gallery-primary-color-rgb), var(--gallery-button-hover-alpha));
+}
+
+/* --- Update Button (Accent - styled as Success Green) --- */
+.portfolio-card mat-card-actions button[mat-stroked-button][color="accent"] {
+  color: var(--gallery-accent-color-for-update);
+  border-color: var(--gallery-accent-color-for-update);
+}
+.portfolio-card mat-card-actions button[mat-stroked-button][color="accent"]:hover {
+  background-color: rgba(var(--gallery-accent-color-for-update-rgb), var(--gallery-button-hover-alpha));
+}
+
+/* --- Delete Button (Warn - styled as Danger Red) --- */
+.portfolio-card mat-card-actions button[mat-stroked-button][color="warn"] {
+  color: var(--gallery-warn-color-for-delete);
+  border-color: var(--gallery-warn-color-for-delete);
+}
+.portfolio-card mat-card-actions button[mat-stroked-button][color="warn"]:hover {
+  background-color: rgba(var(--gallery-warn-color-for-delete-rgb), var(--gallery-button-hover-alpha));
+}
+
+/* Shared hover transform for card action buttons */
+.portfolio-card mat-card-actions button[mat-stroked-button]:hover {
+  transform: scale(1.03); /* Slightly less aggressive than 1.1, more subtle for stroked */
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 959px) {
+    .gallery-header .gallery-title,
+    .gallery-header .mat-headline-4 {
+        font-size: 1.6rem;
+    }
+    .portfolio-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 599px) {
+  .gallery-container {
+    padding: 16px 8px;
+  }
+
+  .gallery-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .gallery-header .gallery-title,
+  .gallery-header .mat-headline-4 {
+      text-align: center;
+      font-size: 1.4rem;
+  }
+
+  .new-portfolio-btn {
+    margin-top: 8px;
+    align-self: stretch;
+    margin-left: 0;
+  }
+
+  .portfolio-card mat-card-actions {
+    padding: 8px;
+    gap: 6px;
+    /* Optional: Allow buttons to wrap and center if they are too many for one line on small screens */
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+  }
+  .portfolio-card mat-card-actions button[mat-stroked-button] {
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font */
+  }
+  .portfolio-card mat-card-actions button[mat-stroked-button] mat-icon {
+    margin-right: 4px;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+  }
+}
