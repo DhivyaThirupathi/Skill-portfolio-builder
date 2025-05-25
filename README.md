@@ -1,6 +1,7 @@
 # Skill Portfolio Builder
 
-demo : https://github.com/DhivyaThirupathi/Skill-portfolio-builder
+demo : https://DhivyaThirupathi.github.io/Skill-portfolio-builder/
+
 
 A full-stack web application for creating and managing professional skill portfolios.
 
